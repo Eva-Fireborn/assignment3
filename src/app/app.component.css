@@ -1,0 +1,16 @@
+.headerPic {
+    width: 100%;
+    position: relative;
+    top: -650px;
+}
+.header {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+.header h1 {
+    color: wheat;
+    position: relative;
+    top: -1050px;
+    left: 20%;
+}

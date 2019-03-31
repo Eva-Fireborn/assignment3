@@ -1,0 +1,65 @@
+<form [formGroup]="userNameGroup">
+  <div class="userName">
+    <label class="firstLabel">Användarnamn</label>
+    <input type="text" placeholder="Användarnamn" formControlName="userNameControl"
+    [class.valid]="userNameControl.valid"
+    [class.invalid]="userNameControl.invalid && userNameControl.touched"/>
+  </div>
+  <div class="errorMessage" id="firstErrorBox">
+    <p *ngIf="(userNameControl.errors?.required || userNameControl.errors?.minlength || userNameControl.errors?.maxlength) && userNameControl.touched">
+      Ditt användarnamn måste vara mellan 5-8 tecken långt.</p> 
+  </div>
+  <div class="realName">
+    <label>Namn</label><br/>
+    <input type="text" placeholder="Förnamn" formControlName="firstNameControl"
+    [class.valid]="firstNameControl.valid"
+    [class.invalid]="firstNameControl.invalid && firstNameControl.touched"/>
+    <input type="text" placeholder="Efternamn" formControlName="lastNameControl"
+    [class.valid]="lastNameControl.valid"
+    [class.invalid]="lastNameControl.invalid && lastNameControl.touched"/>
+    <br/>
+    <br/>
+    <label>Stad</label>
+    <br/>
+    <input type="text" placeholder="Stad" formControlName="cityNameControl"
+    [class.valid]="cityNameControl.valid"
+    [class.invalid]="cityNameControl.invalid && cityNameControl.touched"/>
+  </div>
+  <div class="errorMessage" id="secondErrorBox">
+    <p *ngIf="(firstNameControl.errors?.required || lastNameControl.errors?.required) && (firstNameControl.touched || lastNameControl.touched)">
+      Du måste fylla i ditt namn.</p>
+    <p id="secondP" *ngIf="cityNameControl.errors?.required && cityNameControl.touched">
+      Du måste fylla i vilken stad du bor.</p>
+  </div>
+  <div class="clearedForm" *ngIf="userNameGroup.valid">
+    <p>✔️</p>
+  </div>
+</form>
+<div class="aboutUser">
+  <label>Skriv lite om dig själv så andra kan lära känna dig bättre.</label>
+  <textarea rows="4" cols="50" [formControl]="aboutUserControl"
+  [class.valid]="aboutUserControl.valid"
+  [class.invalid]="aboutUserControl.invalid && aboutUserControl.touched"></textarea>
+</div>
+<div class="errorMessage" id="thirdErrorBox">
+  <p *ngIf="(aboutUserControl.errors?.required || aboutUserControl.errors?.minlength) && aboutUserControl.touched">
+    Du behöver fylla i minst 20 tecken om dig själv.</p>
+  <p *ngIf="aboutUserControl.errors?.maxlength">
+  Du kan inte skriva in mer än 200 tecken.</p>  
+</div>
+<div class="clearedForm" *ngIf="aboutUserControl.valid">
+  <p>✔️</p>
+</div>  
+<div class="userCompetencies">
+  <label>Kompetenser</label><br/>
+  <select [(ngModel)]="userLanguage">
+    <option *ngFor="let language of languages" [value]="language">{{language}}</option>
+  </select>
+  <button (click)="addLanguageToUserLanguages()">Lägg till</button><span *ngIf="incorrectLanguage">Du måste välja ett språk</span>
+  <ul>
+    <li *ngFor="let language of userLanguages">{{language}}</li>
+  </ul>
+</div>
+
+<app-form2></app-form2>
+

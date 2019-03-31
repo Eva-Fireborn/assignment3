@@ -7,3 +7,14 @@
 .errorMessage{
     color:red;
 }
+.userEducation {
+    margin-top: 50px;
+    width: 170px;
+}
+.userEmployment {
+    margin-top: 50px;
+    width: 170px;
+}
+#inputNumber {
+    width: 75px;
+}

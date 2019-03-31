@@ -55,7 +55,7 @@ export class Form2Component implements OnInit {
       workTitle: this.userTitleControl.value,
       startYear: this.userStartEmploymentControl.value,
       endYear: this.userEndEmploymentControl.value
-    }
+    } 
     return this.userProfileService.setDataEmployment(newEmployment);
   }
   ngOnInit() {

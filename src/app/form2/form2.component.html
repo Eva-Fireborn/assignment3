@@ -1,14 +1,16 @@
 <form [formGroup]="userEducationGroup">
-  <label>Utbildningar</label><br/>
-  <input type="text" placeholder="Skola" formControlName="userSchoolControl"
-  [class.valid]="userSchoolControl.valid"
-  [class.invalid]="userSchoolControl.invalid && userSchoolControl.touched"/>
-  <input type="text" placeholder="Startår" formControlName="userStartControl"
-  [class.valid]="userStartControl.valid"
-  [class.invalid]="userStartControl.invalid && userStartControl.touched"/>
-  <input type="text" placeholder="Slutår" formControlName="userEndControl"
-  [class.valid]="userEndControl.valid"
-  [class.invalid]="userEndControl.invalid && userEndControl.touched"/>
+  <div class="userEducation">
+    <label>Utbildningar</label><br/>
+    <input type="text" placeholder="Skola" formControlName="userSchoolControl"
+    [class.valid]="userSchoolControl.valid"
+    [class.invalid]="userSchoolControl.invalid && userSchoolControl.touched"/>
+    <input type="text" placeholder="Startår" formControlName="userStartControl" id="inputNumber"
+    [class.valid]="userStartControl.valid"
+    [class.invalid]="userStartControl.invalid && userStartControl.touched"/>
+    <input type="text" placeholder="Slutår" formControlName="userEndControl" id="inputNumber"
+    [class.valid]="userEndControl.valid"
+    [class.invalid]="userEndControl.invalid && userEndControl.touched"/>
+  </div>
 </form>
 <div class="errorMessage" id="firstErrorBox">
   <p *ngIf="userSchoolControl.errors?.required && userSchoolControl.touched">
@@ -24,6 +26,7 @@
   {{user.startYear}}-{{user.endYear}}
 </div>
 <form [formGroup]="userEmploymentGroup">
+  <div class="userEmployment">
     <label>Anställningar</label><br/>
     <input type="text" placeholder="Företag" formControlName="userCompanyControl"
     [class.valid]="userCompanyControl.valid"
@@ -31,12 +34,13 @@
     <input type="text" placeholder="Position/Titel" formControlName="userTitleControl"
     [class.valid]="userTitleControl.valid"
     [class.invalid]="userTitleControl.invalid && userTitleControl.touched"/>
-    <input type="text" placeholder="Startår" formControlName="userStartEmploymentControl"
+    <input type="text" placeholder="Startår" formControlName="userStartEmploymentControl" id="inputNumber"
     [class.valid]="userStartEmploymentControl.valid"
     [class.invalid]="userStartEmploymentControl.invalid && userStartEmploymentControl.touched"/>
-    <input type="text" placeholder="Slutår" formControlName="userEndEmploymentControl"
+    <input type="text" placeholder="Slutår" formControlName="userEndEmploymentControl" id="inputNumber"
     [class.valid]="userEndEmploymentControl.valid"
     [class.invalid]="userEndEmploymentControl.invalid && userEndEmploymentControl.touched"/>
+  </div>  
   </form>
   <div class="errorMessage" id="secondErrorBox">
     <p *ngIf="(userCompanyControl.errors?.required || userTitleControl.errors?.required) && (userTitleControl.touched || userCompanyControl.touched)">

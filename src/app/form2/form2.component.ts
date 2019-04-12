@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserProfileService } from '../user-profile.service';
 import { UserEducation } from '../user-education';
 import { UserEmployment } from '../user-employment';
@@ -10,6 +10,9 @@ import { FormControl, Validators, AbstractControl, FormGroup, MinLengthValidator
   styleUrls: ['./form2.component.css']
 })
 export class Form2Component implements OnInit {
+  @Input() userLanguagesCheck: boolean;
+  @Input() aboutUserControl: boolean;
+  @Input() userNameGroup: boolean;   
   userProfileService: UserProfileService;
   userEducation: UserEducation [] = [];
   userEmployment: UserEmployment [] = [];
@@ -22,18 +25,18 @@ export class Form2Component implements OnInit {
   userEndEmploymentControl: AbstractControl
 
   userEducationGroup: FormGroup = new FormGroup({
-		userSchoolControl: new FormControl('', [Validators.required]),
-    userStartControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019)]),
-    userEndControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2025)]), 
+		userSchoolControl: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    userStartControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019), Validators.pattern('[0-9 ]*')]),
+    userEndControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019), Validators.pattern('[0-9 ]*')]), 
 		},
 		{ validators: [] }
   );
 
   userEmploymentGroup: FormGroup = new FormGroup({
-    userCompanyControl: new FormControl('', [Validators.required]),
-    userTitleControl: new FormControl('', [Validators.required]),
-    userStartEmploymentControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019)]),
-    userEndEmploymentControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2025)]), 
+    userCompanyControl: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    userTitleControl: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    userStartEmploymentControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019), Validators.pattern('[0-9 ]*')]),
+    userEndEmploymentControl: new FormControl('', [Validators.required, Validators.min(1950), Validators.max(2019), Validators.pattern('[0-9 ]*')]), 
 		},
 		{ validators: [] }
   );
@@ -41,14 +44,17 @@ export class Form2Component implements OnInit {
   constructor(userProfileService: UserProfileService) { 
     this.userProfileService= userProfileService;
   }
+  userEducationCheck: boolean = false;
   addEducation(){
     let newEducation = {
       school: this.userSchoolControl.value,
       startYear: this.userStartControl.value,
       endYear: this.userEndControl.value
     }
+    this.userEducationCheck = true;
     return this.userProfileService.setDataEducation(newEducation);
   }
+  userEmploymentCheck: boolean = false;
   addEmployment(){
     let newEmployment = {
       company: this.userCompanyControl.value,
@@ -56,6 +62,7 @@ export class Form2Component implements OnInit {
       startYear: this.userStartEmploymentControl.value,
       endYear: this.userEndEmploymentControl.value
     } 
+    this.userEmploymentCheck = true;
     return this.userProfileService.setDataEmployment(newEmployment);
   }
   ngOnInit() {

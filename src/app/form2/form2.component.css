@@ -18,3 +18,29 @@
 #inputNumber {
     width: 75px;
 }
+.progressBar {
+    border: 2px solid black;
+    width: 200px;
+    height: 1.2em;
+    overflow: hidden;
+}
+.innerBar {
+    background-color: #11A109;
+    width: 1%;
+    height: 100%;
+}
+.twenty {
+    width: 20%
+}
+.forty {
+    width: 40%
+}
+.sixty {
+    width: 60%
+}
+.eighty {
+    width: 80%
+}
+.hundred {
+    width: 100%
+}

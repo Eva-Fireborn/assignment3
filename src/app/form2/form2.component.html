@@ -1,3 +1,8 @@
+<div class="progressBar">
+  <div class="innerBar" [ngClass]="{'twenty': userNameGroup, 'forty': aboutUserControl, 'sixty': userLanguagesCheck, 'eighty': userEducationCheck, 'hundred': userEmploymentCheck}">
+
+  </div>
+</div>
 <form [formGroup]="userEducationGroup">
   <div class="userEducation">
     <label>Utbildningar</label><br/>
@@ -16,15 +21,28 @@
   <p *ngIf="userSchoolControl.errors?.required && userSchoolControl.touched">
     Du måste fylla i skolans namn
   </p> 
+  <p *ngIf="userSchoolControl.errors?.minlength && userSchoolControl.touched">
+    Skolnamnet kan inte vara kortare än två bokstäver.
+  </p>
   <p *ngIf="(userStartControl.errors?.required || userEndControl.errors?.required) && (userEndControl.touched || userStartControl.touched)">
     Du måste fylla i årtal med fyra siffror, exempelvis 2015.
+  </p>
+  <p *ngIf="(userStartControl.errors?.min || userEndControl.errors?.min ||
+  userStartControl.errors?.max || userEndControl.errors?.max) && (userEndControl.touched || userStartControl.touched)">
+    Det måste vara ett årtal mellan 1950 till 2019. Om de är din nuvarande utbildning så skriv 2019.
   </p>  
+  <p *ngIf="(userStartControl.errors?.pattern || userEndControl.errors?.pattern) && (userEndControl.touched || userStartControl.touched)">
+    Du kan inte fylla i bokstäver i årtalet.
+  </p>
 </div>
 <button [disabled]="userEducationGroup.invalid" (click)="addEducation()">Lägg till utbildning</button>
 <div *ngFor="let user of userEducation">
   {{user.school}}
   {{user.startYear}}-{{user.endYear}}
 </div>
+<div class="clearedForm" *ngIf="userEducationCheck">
+  <p>✔️</p>
+</div> 
 <form [formGroup]="userEmploymentGroup">
   <div class="userEmployment">
     <label>Anställningar</label><br/>
@@ -46,12 +64,25 @@
     <p *ngIf="(userCompanyControl.errors?.required || userTitleControl.errors?.required) && (userTitleControl.touched || userCompanyControl.touched)">
       Du måste fylla i företag och titel.
     </p> 
+    <p *ngIf="(userCompanyControl.errors?.minlength || userTitleControl.errors?.minlength) && (userTitleControl.touched || userCompanyControl.touched)">
+      Både företag och titel måste ha minst än två bokstäver vardera.
+    </p>
     <p *ngIf="(userStartEmploymentControl.errors?.required || userEndEmploymentControl.errors?.required) && (userEndEmploymentControl.touched || userStartEmploymentControl.touched)">
       Du måste fylla i årtal med fyra siffror, exempelvis 2015.
+    </p>
+    <p *ngIf="(userStartEmploymentControl.errors?.min || userEndEmploymentControl.errors?.min ||
+    userStartEmploymentControl.errors?.max || userEndEmploymentControl.errors?.max) && (userEndEmploymentControl.touched || userStartEmploymentControl.touched)">
+      Det måste vara ett årtal mellan 1950 till 2019. Om de är din nuvarande anställning så skriv 2019.
     </p>  
+    <p *ngIf="(userStartEmploymentControl.errors?.pattern || userEndEmploymentControl.errors?.pattern) && (userEndEmploymentControl.touched || userStartEmploymentControl.touched)">
+      Du kan inte fylla i bokstäver i årtalet.
+    </p>
   </div>
   <button [disabled]="userEmploymentGroup.invalid" (click)="addEmployment()">Lägg till anställning</button>
 <div *ngFor="let user of userEmployment">
     {{user.company}}-{{user.workTitle}}<br/>
     {{user.startYear}}-{{user.endYear}}
   </div>
+  <div class="clearedForm" *ngIf="userEmploymentCheck">
+    <p>✔️</p>
+  </div> 

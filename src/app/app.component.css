@@ -8,9 +8,18 @@
     width: 100%;
     overflow: hidden;
 }
-.header h1 {
-    color: wheat;
+.textHeader {
     position: relative;
-    top: -1050px;
     left: 20%;
+    z-index: 1;
+    top: -100px;
+    margin-bottom: -80px;
+    width: 400px;
+}
+.textHeader h1 {
+    color: wheat;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 3em;
+    background-color: black;
+    width: 320px;
 }

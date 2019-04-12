@@ -1,6 +1,16 @@
+.container {
+    display: inline-flex;
+}
+.firstContainer {
+    margin-left: 100px;
+    width: 450px;
+}
+.secondContainer {
+    margin-left: 0px;
+}
 .userName {
     width: 100px;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 .realName{
     width: 350px;
